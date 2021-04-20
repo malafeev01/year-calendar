@@ -1,0 +1,95 @@
+.calendar-date-cell {
+  user-select: none;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.calendar-date-cell-selected {
+  background: rgb(230 230 230) !important;
+}
+
+.ant-picker-cell-in-view:hover {
+  background: rgb(230 230 230) !important;
+}
+
+.calendar-row-container {
+  max-width: 390px;
+  min-width: 298px;
+  margin-bottom: 70px;
+}
+
+.calendar-month-container {
+  width: 100%;
+}
+
+.calendar-container {
+  margin: 50px;
+}
+
+.calendar-month-label {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  user-select: none;
+  text-transform: capitalize;
+  color: red;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.ant-picker-content th {
+  margin-bottom: 50px;
+  user-select: none;
+  text-transform: uppercase;
+  font-weight: 200;
+}
+.ant-picker-content th:nth-child(6) {
+  color: red;
+}
+.ant-picker-content th:nth-child(7) {
+  color: red;
+}
+.ant-picker-content thead {
+  border-bottom: 10px solid white !important;
+}
+
+.event-popup-row {
+  min-width: 300px;
+  margin: 5px;
+}
+
+.event-popup-color-box {
+  height: 15px;
+  width: 15px;
+  margin-bottom: 1px;
+}
+
+.event-popup-color-col {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.event-popup-actions-col {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-left: 20px;
+}
+
+.event-popup-actions-icon {
+  margin-top: 3px;
+  margin-right: 20px;
+  font-size: 16px;
+  color: grey;
+}
+
+.event-popup-actions-icon:hover {
+  cursor: pointer;
+  color: black;
+}

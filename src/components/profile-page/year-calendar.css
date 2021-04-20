@@ -1,0 +1,63 @@
+.year-calendar-loading-box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+
+}
+
+.year-calendar-containter {
+  position: relative;
+  padding-left: 100px;
+  padding-right: 100px;
+  user-select: none;
+}
+
+.year-calendar-loading-icon {
+  font-size: 100px !important;
+  color: #9c9c9c;
+}
+
+.ant-spin-text {
+  color: #9c9c9c;
+  font-size: 25px;
+  font-weight: 200;
+  margin-top: 25px;
+}
+
+.year-calendar-loading-spinner {
+  position: fixed;
+  z-index: 2004;
+  top: 25%;
+  right: 5%;
+  height: 100%;
+  width: 100%;
+}
+
+.year-calendar-change-year {
+  margin-left: 13px;
+  margin-right: 20px;
+  margin-top: 23px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.year-calendar-change-year:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 1);
+}
+
+.year-calendar-current-year {
+  font-size: 40px;
+  font-weight: 100;
+
+}
+
+.year-calendar-current-year-box {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

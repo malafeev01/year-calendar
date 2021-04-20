@@ -3,10 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ConfigProvider } from 'antd';
+
+import ru_RU from 'antd/lib/locale-provider/ru_RU';
+import moment from 'moment';
+import 'moment/locale/ru';  // important!
+
+moment.locale('ru');  // important!
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ConfigProvider locale={ru_RU}>
+      <App />
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
