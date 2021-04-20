@@ -1,5 +1,5 @@
-const CLIENT_ID = "879136292611-c8elhdssuefvl4t9m54n8q8dijcv59fs.apps.googleusercontent.com"
-const API_KEY = "AIzaSyALEpcRPtzlMCGpL-Ec9tZceIsWRAeOwx4"
+const CLIENT_ID = ""
+const API_KEY = ""
 const SCOPE = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.readonly"
 const DISCOVERY = "https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest"
 const CALENDAR_NAME = "YearCalendarApp"
