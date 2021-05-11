@@ -24,13 +24,16 @@ class App extends React.Component {
   componentDidMount() {
     logInfo(this, "componentDidMount: starting initializing API");
     this.api = new Api();
-    this.api.initialize().then(() => {
+    logInfo(this, "componentDidMount: API initialized");
+
+    this.api.getSession().then( (session )=> {
       this.setState({loading: false});
-      logInfo(this, "componentDidMount: API initialized");
     }).catch( (error) => {
+      this.setState({loading: false});
       logError(this, JSON.stringify(error));
       showErrorNotification(error);
     });
+
   }
 
   render() {

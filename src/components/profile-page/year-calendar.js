@@ -224,6 +224,7 @@ class YearCalendar extends React.Component {
       showSuccessNotification(`Событие "${event.summary}" успешно добавлено в календарь`);
 
     }).catch((error)=>{
+      console.log(error)
       logError(this, JSON.stringify(error));
       showErrorNotification(error);
     });
@@ -248,6 +249,7 @@ class YearCalendar extends React.Component {
       showSuccessNotification(`Событие "${event.summary}" успешно обновлено`);
 
     }).catch((error)=>{
+      console.log(error)
       logError(this, JSON.stringify(error))
       showErrorNotification(error);
     });

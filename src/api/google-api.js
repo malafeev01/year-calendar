@@ -1,75 +1,46 @@
-const CLIENT_ID = ""
-const API_KEY = ""
-const SCOPE = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.readonly"
-const DISCOVERY = "https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest"
 const CALENDAR_NAME = "YearCalendarApp"
 
-const gapi = window.gapi;
 
 class Api {
-
-  initialize() {
-    return new Promise((resolve, reject) => {
-      gapi.load("client:auth2", function() {
-        return gapi.auth2.init({
-          client_id: CLIENT_ID
-        }).then(function(googleAuthObject) {
-          console.log('GAPI: Google API has been initialized');
-
-          //If already signed in
-          if (googleAuthObject.isSignedIn.get()) {
-            gapi.client.setApiKey(API_KEY);
-            return gapi.client.load(DISCOVERY).then(function() {
-                console.log("GAPI: Client ready for using API");
-                resolve();
-              },
-              function(err) {
-                console.error("GAPI: Error loading GAPI client for API", err);
-                reject();
-              });
-          } else {
-            resolve();
-          }
-        });
-      });
-    });
+  constructor() {
+    this.session = null;
   }
 
   signIn() {
-    return gapi.auth2.getAuthInstance()
-      .signIn({
-        scope: SCOPE
-      })
-      .then(function(response) {
-          console.log("GAPI: Sign-in successful");
-          gapi.client.setApiKey(API_KEY);
-          return gapi.client.load(DISCOVERY)
-            .then(function() {
-                console.log("GAPI: Client ready for using API");
-              },
-              function(err) {
-                console.error("GAPI: Error loading GAPI client for API", err);
-              });
-        },
-        function(err) {
-          console.error("GAPI: Error signing in", err);
-        });
+    window.location.href = `/api/login`;
   }
+
   signOut() {
-    return this.getSession().signOut()
+    window.location.href = `/api/logout`;
   }
 
   isSignedIn() {
-    return this.getSession().isSignedIn.get();
+    return this.session ? true : false;
   }
 
   getSession() {
-
-    return gapi.auth2.getAuthInstance();
+    return fetch(`/api/session`, {
+        credentials: "include"
+      })
+      .then(async function(response) {
+        if (response.status > 200) {
+          this.session = null;
+        } else {
+          this.session = await response.json();
+        }
+      }.bind(this));
   }
 
   getUserProfile() {
-    return this.getSession().currentUser.get().getBasicProfile();
+    // That is needed for compatibility with Google Api JS library
+    return {
+      'getName': function() {
+        return this.session.name
+      }.bind(this),
+      'getImageUrl': function() {
+        return this.session.picture
+      }.bind(this)
+    };
   }
 
 
@@ -80,16 +51,16 @@ class Api {
         reject("You are not logged in");
         return;
       };
-
-      gapi.client.calendar.calendarList.list({})
-        .then(function(response) {
-
-            resolve(response.result.items);
+      fetch(`/api/calendars`, {
+          credentials: "include"
+        })
+        .then(async function(response) {
+            let resp = await response.json();
+            resolve(resp.items);
           },
           function(err) {
             reject(err);
-          }
-        );
+          });
     });
   }
 
@@ -122,10 +93,18 @@ class Api {
           reject('Calendar ' + CALENDAR_NAME + ' already exists');
           return;
         } else {
-          gapi.client.calendar.calendars.insert({
-              "resource": {
-                "summary": CALENDAR_NAME,
-                "timeZone": Intl.DateTimeFormat().resolvedOptions().timeZone
+
+          let calendar = {
+            "summary": CALENDAR_NAME,
+            "timeZone": Intl.DateTimeFormat().resolvedOptions().timeZone
+          }
+          fetch(`api/calendars`, {
+              credentials: "include",
+              body: JSON.stringify(calendar),
+              method: 'CREATE',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
               }
             })
             .then(function(response) {
@@ -147,13 +126,14 @@ class Api {
         reject("You are not logged in");
         return;
       };
+      let calendarId = localStorage.getItem('calendarId');
 
-      gapi.client.calendar.events.list({
-          calendarId: localStorage.getItem('calendarId'),
-          showDeleted: false
+      fetch(`/api/calendars/${calendarId}/events`, {
+          credentials: "include"
         })
-        .then(function(response) {
-            resolve(response.result.items);
+        .then(async function(response) {
+            let resp = await response.json();
+            resolve(resp);
           },
           function(err) {
             reject(err);
@@ -170,12 +150,20 @@ class Api {
         reject("You are not logged in");
         return;
       };
-      gapi.client.calendar.events.insert({
-          calendarId: localStorage.getItem('calendarId'),
-          resource: event
+
+      let calendarId = localStorage.getItem('calendarId');
+      fetch(`/api/calendars/${calendarId}/events`, {
+          credentials: "include",
+          body: JSON.stringify({event: event}),
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
         })
-        .then(function(response) {
-            resolve(response);
+        .then(async function(response) {
+            let data = await response.json()
+            resolve(data);
           },
           function(err) {
             reject(err);
@@ -192,10 +180,11 @@ class Api {
         reject("You are not logged in");
         return;
       };
-
-      gapi.client.calendar.events.delete({
-          calendarId: localStorage.getItem('calendarId'),
-          eventId: event.id
+      let calendarId = localStorage.getItem('calendarId');
+      let eventId = event.id
+      fetch(`/api/calendars/${calendarId}/events/${eventId}`, {
+          credentials: "include",
+          method: 'DELETE'
         })
         .then(function(response) {
             resolve(response);
@@ -215,13 +204,20 @@ class Api {
         return;
       };
 
-      gapi.client.calendar.events.update({
-          calendarId: localStorage.getItem('calendarId'),
-          eventId: event.id,
-          resource: event
+      let calendarId = localStorage.getItem('calendarId');
+      let eventId = event.id
+      fetch(`/api/calendars/${calendarId}/events/${eventId}`, {
+          credentials: "include",
+          body: JSON.stringify({event: event}),
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
         })
-        .then(function(response) {
-            resolve(response);
+        .then(async function(response) {
+            let data = await response.json()
+            resolve(data);
           },
           function(err) {
             reject(err);
