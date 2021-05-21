@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Calendar, Popover } from 'antd';
 import moment from 'moment';
 import './month-calendar.css'
-import {daysBetweenDates, isDateInArray, logInfo} from '../../common/utilities.js'
+import {daysBetweenDates, isDateInArray, logInfo, isMobile} from '../../common/utilities.js'
 import COLORS from '../../common/colors.js'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
@@ -107,12 +107,12 @@ class MonthCalendar extends React.Component {
 
         let events = this.getEventsForDate(date);
 
-        if (events.length > 0) {
+        if (events.length > 0 && !isMobile()) {
           cellRender = <Popover content={getPopoverContent(events, this)}
                                 title="События">
                           <div title={ date.format("YYYY-MM-DD").toString() }
                                className="calendar-date-cell"
-                               onClick={(event) => event.stopPropagation()}>
+                               onClick={ (event) => { if (moment(event.target.title).month() !== this.state.value.month()) { event.stopPropagation(); } } }>
                             { date.date() }
                           </div>
                        </Popover>;
@@ -120,7 +120,7 @@ class MonthCalendar extends React.Component {
         else {
           cellRender = <div title={ date.format("YYYY-MM-DD").toString() }
                             className="calendar-date-cell"
-                            onClick={(event) => event.stopPropagation()}>
+                            onClick={ (event) => { if (moment(event.target.title).month() !== this.state.value.month()) { event.stopPropagation(); } } }>
                         { date.date() }
                       </div>;
         }

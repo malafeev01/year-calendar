@@ -9,8 +9,8 @@
 
 .year-calendar-containter {
   position: relative;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 5vw;
+  padding-right: 5vw;
   user-select: none;
 }
 

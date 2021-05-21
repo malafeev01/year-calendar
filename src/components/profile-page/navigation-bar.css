@@ -6,7 +6,11 @@
   float: right;
   margin-left: 20px;
   margin-top: 8px;
+
+
+
 }
+
 .ant-menu-item-only-child{
   background: none;
 
@@ -26,6 +30,7 @@
   float: right;
   font-weight: 200;
   font-size: 17px;
+  padding-top: 3px !important;
 }
 
 
@@ -50,6 +55,7 @@
   background-size: cover;
   margin-bottom: 5px;
   opacity: 0.5;
+  margin-top: 7px !important;
 }
 
 .profile-nav-bar-icon:hover {

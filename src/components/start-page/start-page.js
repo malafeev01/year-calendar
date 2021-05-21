@@ -67,7 +67,7 @@ class StartPage extends React.Component {
 
     return (
     <>
-      <Menu style={{ position: "fixed", zIndex: 1, width: "100%", background: "#423c52"}}
+      <Menu style={{ position: "fixed", zIndex: 1001, width: "100%", background: "#423c52"}}
             mode="horizontal" theme='dark'>
 
         { item }
@@ -122,15 +122,31 @@ class StartPage extends React.Component {
         <div className="start-page-app-donate-container">
 
           <blockquote>
-            Привет, планируя путешествия или какие-то мероприятия за долго до их совершения, мне всегда не хватало такого календаря, где на годовом виде будут отображены все запланированные события, так чтобы я ничего не забыл. Тогда мне и пришла идея написать такое приложение. Эти приложением можете пользоваться и вы совершенно бесплатно, без пробного периода и надоедливой рекламы.
-            При этом, я буду рад любой поддержке для развитие проекта.
+            Привет, планируя путешествия или какие-то мероприятия за долго до их совершения, мне всегда не хватало такого календаря, где на годовом виде будут отображены все запланированные события, так чтобы я ничего не забыл. Тогда мне и пришла идея написать такое приложение. Этим приложением можете пользоваться и вы, совершенно бесплатно, без пробного периода и надоедливой рекламы.
+            При этом, я буду рад любой поддержке для развития проекта.
           <span>Алексей Малафеев (автор проекта)</span>
           </blockquote>
 
         </div>
 
-      <div className="start-page-app-donate-box">
-        <iframe title="donate" src="https://yoomoney.ru/quickpay/shop-widget?writer=seller&targets=%D0%A1%D0%BF%D0%B0%D1%81%D0%B8%D0%B1%D0%BE%20%D0%B7%D0%B0%20%D0%93%D0%BE%D0%B4%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%9A%D0%B0%D0%BB%D0%B5%D0%B4%D0%B0%D1%80%D1%8C&targets-hint=&default-sum=100&button-text=14&hint=&successURL=&quickpay=shop&account=410019253514907" frameBorder="0" allowtransparency="true" scrolling="no" style={{height: "400px"}}></iframe>
+        <div className="start-page-app-donate-box">
+
+          <form method="POST" action="https://yoomoney.ru/quickpay/confirm.xml" target='_blank'>
+              <input type="hidden" name="receiver" value="410019253514907"/>
+              <input type="hidden" name="quickpay-form" value="donate"/>
+              <input type="hidden" name="targets" value="Спасибо за годовой календарь"/>
+              <div>
+                <input name="sum" defaultValue="100" data-type="number" className="start-page-donate-input"/>
+              </div>
+              <div className="start-page-donate-currency">
+                рублей
+              </div>
+              <div className="start-page-donate-button-box">
+                <input type="submit" value="Перевести" className="start-page-donate-button"/>
+              </div>
+
+          </form>
+
         </div>
       </div>
 
@@ -141,6 +157,22 @@ class StartPage extends React.Component {
         <div className="start-page-app-email-container">
           <a href="mailto:malafeev.alexey@gmail.com">malafeev.alexey@gmail.com</a>
         </div>
+        <div className="start-page-app-social-container">
+          <a href="https://github.com/malafeev01" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+
+        <div className="start-page-app-social-container">
+          <a href="https://vk.com/malafeev_alexey" target="_blank" rel="noreferrer">VKontakte</a>
+        </div>
+
+        <div className="start-page-app-social-container">
+          <a href="https://www.facebook.com/alexey.malafeev" target="_blank" rel="noreferrer">Facebook</a>
+        </div>
+
+        <div className="start-page-app-social-container">
+          <a href="https://www.instagram.com/malafeev_alexey/" target="_blank" rel="noreferrer">Instagram</a>
+        </div>
+
       </div>
 
       <div className="start-page-footer">

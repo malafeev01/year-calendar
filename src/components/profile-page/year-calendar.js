@@ -4,9 +4,12 @@ import { Row, Col, Modal, Spin } from 'antd';
 import moment from 'moment';
 import MonthCalendar from './month-calendar.js';
 import EditEventDialog from './edit-event-dialog.js';
+import MobileInfoDialog from './mobile-info-dialog.js';
+import MobileEditEventDialog from './mobile-edit-event-dialog.js';
+
 import COLORS from '../../common/colors.js';
 import {daysBetweenDates,
-  isDateInArray, DATE_FORMAT, logInfo, logError} from '../../common/utilities.js';
+  isDateInArray, DATE_FORMAT, logInfo, logError, isMobile} from '../../common/utilities.js';
 import { ExclamationCircleOutlined,
   LoadingOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 
@@ -32,16 +35,22 @@ class YearCalendar extends React.Component {
       currentEvent: null,
       editDialogMode: 'edit',
       events: props.events,
-      currentYear: moment().year()
+      currentYear: moment().year(),
+      showMobileInfoDialog: false,
+      showMobileEditEventDialog: false,
+      selectedDate: null
     }
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
     this.showEditEventDialog = this.showEditEventDialog.bind(this);
+    this.showMobileEditEventDialog = this.showMobileEditEventDialog.bind(this);
     this.closeEditDialog = this.closeEditDialog.bind(this);
+    this.closeMobileInfoDialog = this.closeMobileInfoDialog.bind(this);
+    this.closeMobileEditEventDialog = this.closeMobileEditEventDialog.bind(this);
     this.showDeleteConfirm = this.showDeleteConfirm.bind(this);
-    this.handleTouchMove = this.handleTouchMove.bind(this);
+    this.handleDoubleTap = this.handleDoubleTap.bind(this);
 
     this.createEvent = this.createEvent.bind(this);
     this.updateEvent = this.updateEvent.bind(this);
@@ -57,14 +66,10 @@ class YearCalendar extends React.Component {
 
     this.touchStartTime = null;
     this.touchStartTarget = null
+    this.lastTap = null;
   }
 
   handleMouseDown (event) {
-    if (event.type === "touchstart") {
-      this.touchStartTime = moment();
-      this.touchStartTarget = event.target;
-    }
-
     this.dateRangeStart = null;
     this.dateRangeEnd = null;
 
@@ -110,14 +115,6 @@ class YearCalendar extends React.Component {
     });
   }
 
-  handleTouchMove(event) {
-    let myLocation = event.changedTouches[0];
-    event.target = document.elementFromPoint(myLocation.clientX, myLocation.clientY);
-
-    this.handleMouseOver(event);
-
-  }
-
   handleMouseOver (event) {
     if (this.selection) {
       if (event.target.className.includes(CELL_INNER_CLASS)){
@@ -128,21 +125,8 @@ class YearCalendar extends React.Component {
   }
 
   handleMouseUp (event) {
+    console.log(event);
     this.selection = false;
-
-    if (event.type === "touchend") {
-      let myLocation = event.changedTouches[0];
-      let eventTarget = document.elementFromPoint(myLocation.clientX, myLocation.clientY);
-      let events = eventTarget.parentNode.getAttribute('events');
-      let timeDiff = moment().diff(this.touchStartTime) / 1000;
-      if (eventTarget === this.touchStartTarget && timeDiff > 0.5 && events) {
-        let mouseoverEvent = new Event('mouseover');
-        eventTarget.dispatchEvent(mouseoverEvent);
-        mouseoverEvent = new Event('mouseenter');
-        eventTarget.dispatchEvent(mouseoverEvent);
-        return;
-      }
-    }
 
     if (event.target.className.includes(CELL_INNER_CLASS)){
       let startDate = this.dateRangeStart;
@@ -211,7 +195,6 @@ class YearCalendar extends React.Component {
     });
     logInfo(this, `showEvents: ${events.length} events have shown`);
   }
-
 
   createEvent(event) {
     logInfo(this, `createEvent: Creating a new event`);
@@ -306,8 +289,36 @@ class YearCalendar extends React.Component {
     logInfo(this, 'closeEditDialog: closing edit dialog');
     this.setState({
       showEditDialog: false,
+      showMobileEditEventDialog: false,
       currentEvent: null,
       editDialogMode: 'edit'
+    })
+  }
+
+  closeMobileInfoDialog(){
+    logInfo(this, 'closeMobileInfoDialog: closing mobile info dialog');
+    this.setState({
+      showMobileInfoDialog: false,
+      selectedDate: null
+    })
+  }
+
+  closeMobileEditEventDialog() {
+    logInfo(this, 'closeMobileEditEventDialog: closing mobile create/edit event dialog');
+    this.setState({
+      showMobileInfoDialog: false,
+      showMobileEditEventDialog: true
+    })
+
+  }
+
+  showMobileEditEventDialog(event, mode){
+    logInfo(this, 'showMobileEditEventDialog: showing mobile create/edit event dialog');
+    this.setState({
+      showMobileInfoDialog: false,
+      showMobileEditEventDialog: true,
+      currentEvent: event,
+      editDialogMode: mode
     })
   }
 
@@ -340,33 +351,62 @@ class YearCalendar extends React.Component {
     return state;
   }
 
+  handleDoubleTap = (event) => {
+    if (event.target.className.includes(CELL_INNER_CLASS)){
+      const now = Date.now();
+      const DOUBLE_PRESS_DELAY = 300;
+      if (this.lastTap && (now - this.lastTap) < DOUBLE_PRESS_DELAY) {
+        this.setState({showMobileInfoDialog: true,
+                       selectedDate: event.target.title})
+
+      } else {
+        this.lastTap = now;
+      }
+    }
+  }
+
   render() {
     logInfo(this, "render: start rendering");
 
-    let editDialog;
+    let dialog;
 
     if (this.state.showEditDialog) {
-      editDialog = <EditEventDialog visible={this.state.showEditDialog}
-                    event={this.state.currentEvent} mode={this.state.editDialogMode}
-                    onCancelEditDialog={this.closeEditDialog}
-                    onUpdateEvent={ this.updateEvent }
-                    onCreateEvent={ this.createEvent } />
+      dialog = <EditEventDialog visible={this.state.showEditDialog}
+                  event={this.state.currentEvent} mode={this.state.editDialogMode}
+                  onCancelEditDialog={this.closeEditDialog}
+                  onUpdateEvent={ this.updateEvent }
+                  onCreateEvent={ this.createEvent } />
+
+    }
+    else if (this.state.showMobileInfoDialog) {
+      dialog = <MobileInfoDialog
+                events={this.state.events}
+                selectedDate={ this.state.selectedDate }
+                onCancelInfoDialog={ this.closeMobileInfoDialog }
+                onDeleteEvent={ this.showDeleteConfirm }
+                onShowMobileEditDialog={ this.showMobileEditEventDialog }
+                onUpdateEvent={ this.updateEvent }
+                onCreateEvent={ this.createEvent }
+                />
+    }
+    else if (this.state.showMobileEditEventDialog) {
+      dialog = <MobileEditEventDialog
+                event={this.state.currentEvent} mode={this.state.editDialogMode}
+                onCancelEditDialog={this.closeEditDialog}
+                onUpdateEvent={ this.updateEvent }
+                onCreateEvent={ this.createEvent } />
     }
     else {
-      editDialog = <></>
+      dialog = <></>
     }
 
     return (
       <>
-        { editDialog }
-        <div onMouseDown={ this.handleMouseDown }
-             onMouseOver={ this.handleMouseOver }
-             onMouseUp={ this.handleMouseUp }
-
-             onTouchStart = { this.handleMouseDown }
-             onTouchMove = { this.handleTouchMove }
-             onTouchEnd={ this.handleMouseUp }
-
+        { dialog }
+        <div onMouseDown={ !isMobile() ? this.handleMouseDown : null }
+             onMouseOver={ !isMobile() ? this.handleMouseOver : null }
+             onMouseUp={ !isMobile() ? this.handleMouseUp : null }
+             onClick={ isMobile() ? this.handleDoubleTap : null }
              className="year-calendar-containter">
 
           <div className="year-calendar-loading-box" style={{display: this.state.loading ? "notset" : "none"}}>

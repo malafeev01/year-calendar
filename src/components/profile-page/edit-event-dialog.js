@@ -4,22 +4,12 @@ import { Modal, Form, Input, Select, TimePicker, DatePicker } from 'antd';
 import moment from 'moment';
 import COLORS from '../../common/colors.js';
 import { DATE_FORMAT } from '../../common/utilities.js';
-import { logInfo } from '../../common/utilities.js';
+import { logInfo, getDisabledHours, getDisabledMinutes } from '../../common/utilities.js';
+import ColorItem from './color-item.js'
 
 const { TextArea } = Input;
 const { Option } = Select;
 
-
-class ColorItem extends React.Component {
-  render () {
-    return (
-      <div className="color-item" colorid={this.props.colorid}
-           color={this.props.color}
-           style={{background: this.props.color}}>
-      </div>
-    )
-  }
-}
 
 class EditEventDialog extends React.Component {
   constructor (props) {
@@ -37,8 +27,6 @@ class EditEventDialog extends React.Component {
     this.onDateChange = this.onDateChange.bind(this);
     this.onColorChange = this.onColorChange.bind(this);
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
-    this.getDisabledHours = this.getDisabledHours.bind(this);
-    this.getDisabledMinutes = this.getDisabledMinutes.bind(this);
 
     this.oneDay = moment(this.event.start.dateTime);
   }
@@ -86,35 +74,6 @@ class EditEventDialog extends React.Component {
     this.event.description = event.target.value;
   }
 
-
-  getDisabledHours(isStartTime) {
-    let endHour = isStartTime ? moment(this.event.end.dateTime).hour() :
-                                moment(this.event.start.dateTime).hour()
-    let disabledHours = []
-    for (let i=0; i<24;i++){
-      if (isStartTime) {
-        if (i > endHour) disabledHours.push(i);
-      } else{
-        if (i < endHour) disabledHours.push(i);
-      }
-    }
-    return disabledHours;
-  }
-
-  getDisabledMinutes(isStartTime) {
-    let endMinute = isStartTime ? moment(this.event.end.dateTime).minute() :
-                                  moment(this.event.start.dateTime).minute()
-    let disabledMinutes = []
-    for (let i=0; i<60;i++){
-      if (isStartTime) {
-        if (i > endMinute) disabledMinutes.push(i);
-      } else{
-        if (i < endMinute) disabledMinutes.push(i);
-      }
-    }
-    return disabledMinutes;
-  }
-
   render(){
     logInfo(this, 'render: rendering create/edit event dialog');
     let colorOptions = [];
@@ -133,14 +92,14 @@ class EditEventDialog extends React.Component {
 
     if (isOneDayEvent) {
       startDatePicker = <TimePicker format="HH:mm"
-                                    disabledHours={ () => this.getDisabledHours(true) }
-                                    disabledMinutes={ () => this.getDisabledMinutes(true) }
+                                    disabledHours={ () => getDisabledHours(this.event, true) }
+                                    disabledMinutes={ () => getDisabledMinutes(this.event, true) }
                                     allowClear={false} defaultValue={moment(this.event.start.dateTime)}
                                     onChange={this.onStartDateTimeChange}/>
 
       endDatePicker = <TimePicker  format="HH:mm"
-                                   disabledHours={ () => this.getDisabledHours(false) }
-                                   disabledMinutes={ () => this.getDisabledMinutes(false) }
+                                   disabledHours={ () => getDisabledHours(this.event, false) }
+                                   disabledMinutes={ () => getDisabledMinutes(this.event, false) }
                                    allowClear={false} defaultValue={moment(this.event.end.dateTime)}
                                    onChange={this.onEndDateTimeChange}/>
 
