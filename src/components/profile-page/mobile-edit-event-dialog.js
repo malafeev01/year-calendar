@@ -3,8 +3,8 @@ import './mobile-info-dialog.css'
 import './mobile-edit-event-dialog.css'
 import { Button } from 'antd';
 import COLORS from '../../common/colors.js'
-import { Form, Input, Select, TimePicker, DatePicker } from 'antd';
-import { logInfo, getDisabledHours, getDisabledMinutes } from '../../common/utilities.js'
+import { Form, Input, Select, Alert } from 'antd';
+import { logInfo } from '../../common/utilities.js'
 import ColorItem from './color-item.js'
 import moment from 'moment';
 import { DATE_FORMAT } from '../../common/utilities.js';
@@ -19,7 +19,12 @@ class MobileEditEventDialog extends React.Component {
     super(props)
     this.event = props.event;
     this.state = {
-      eventSummary: this.event.summary
+      eventSummary: this.event.summary,
+      startDate: this.event.start.dateTime.format(DATE_FORMAT).toString(),
+      startTime: this.event.start.dateTime.format("HH:mm").toString(),
+      endDate: this.event.end.dateTime.format(DATE_FORMAT).toString(),
+      endTime: this.event.end.dateTime.format("HH:mm").toString(),
+      showError: false
     };
 
     this.onNameChange = this.onNameChange.bind(this);
@@ -29,29 +34,51 @@ class MobileEditEventDialog extends React.Component {
     this.onEndDateTimeChange = this.onEndDateTimeChange.bind(this);
     this.onColorChange = this.onColorChange.bind(this);
     this.onDescriptionChange = this.onDescriptionChange.bind(this);
-    console.log(this.event);
-  }
 
+  }
 
   onNameChange (event){
     this.event.summary = event.target.value;
     this.setState({eventSummary: this.event.summary});
   }
 
-  onStartDateChange (date) {
-    this.event.start.date = date.format(DATE_FORMAT).toString();
+  checkDates(start, end){
+    let startDateTime = start ? start : moment(this.state.startDate + ' ' + this.state.startTime);
+    let endDateTime = end ? end : moment(this.state.endDate + ' ' + this.state.endTime);
+
+    return startDateTime > endDateTime ? true : false;
   }
 
-  onEndDateChange (date) {
-    this.event.end.date = date.format(DATE_FORMAT).toString();
+  onStartDateChange (event) {
+    let startDate = moment(event.target.value + ' ' + this.state.startTime);
+    let showError = this.checkDates(startDate, null);
+    this.setState({startDate: event.target.value, showError: showError});
+
+    this.event.start.dateTime = startDate.format();
   }
 
-  onStartDateTimeChange (dateTime) {
-    this.event.start.dateTime = dateTime.format();
+  onEndDateChange (event) {
+    let endDate = moment(event.target.value + ' ' + this.state.endTime);
+    let showError = this.checkDates(null, endDate);
+    this.setState({endDate: event.target.value, showError: showError});
+
+    this.event.end.dateTime = endDate.format();
   }
 
-  onEndDateTimeChange (dateTime) {
-    this.event.end.dateTime = dateTime.format();
+  onStartDateTimeChange (event) {
+    let startDate = moment(this.state.startDate + ' ' + event.target.value);
+    let showError = this.checkDates(startDate, null);
+    this.setState({startTime: event.target.value, showError: showError});
+
+    this.event.start.dateTime = startDate.format();
+  }
+
+  onEndDateTimeChange (event) {
+    let endDate = moment(this.state.endDate + ' ' + event.target.value);
+    let showError = this.checkDates(null, endDate);
+    this.setState({endTime: event.target.value, showError: showError});
+
+    this.event.end.dateTime = endDate.format();
   }
 
   onColorChange(event){
@@ -73,6 +100,12 @@ class MobileEditEventDialog extends React.Component {
                           { colorItem }
                         </Option>)
     }
+
+    let alert;
+    if (this.state.showError) {
+      alert = <Alert message="Начальная дата больше конечной" type="error" className="error-message "/>
+    }
+
     return (
       <>
         <div className="mobile-info-dialog-container">
@@ -88,34 +121,28 @@ class MobileEditEventDialog extends React.Component {
             <Form labelCol={{ span: 6, }} wrapperCol={{ span: 14, }}
                   layout="horizontal">
 
+              {alert}
 
               <Form.Item label="Начало">
+                <input type='date' className="ant-input date-input" value={this.state.startDate}
+                       onChange={this.onStartDateChange}
+                       max={this.state.endDate}></input>
 
-                <DatePicker allowClear={false}
-                            disabledDate={d => !d || d.isAfter(this.event.end.dateTime) }
-                            defaultValue={moment(this.event.start.dateTime) }
-                            onChange={this.onStartDateTimeChange} />
-
-                <TimePicker format="HH:mm"
-                            disabledHours={ () => getDisabledHours(this.event, true) }
-                            disabledMinutes={ () => getDisabledMinutes(this.event, true) }
-                            allowClear={false} defaultValue={ moment(this.event.start.dateTime) }
-                            onChange={this.onStartDateTimeChange}/>
+                     <input type='time' className="ant-input time-input" value={this.state.startTime}
+                       onChange={this.onStartDateTimeChange}
+                       max={this.state.endTime}></input>
 
               </Form.Item>
 
               <Form.Item label="Конец">
 
-                <DatePicker allowClear={false}
-                            disabledDate={d => !d || d.isBefore(this.event.start.dateTime)}
-                            defaultValue={moment(this.event.end.dateTime)}
-                            onChange={this.onEndDateTimeChange} />
+                <input type='date' className="ant-input date-input" value={this.state.endDate}
+                       onChange={this.onEndDateChange}
+                       min={this.state.startDate}></input>
 
-                <TimePicker format="HH:mm"
-                            disabledHours={ () => getDisabledHours(this.event, false) }
-                            disabledMinutes={ () => getDisabledMinutes(this.event, false) }
-                            allowClear={false} defaultValue={ moment(this.event.end.dateTime) }
-                            onChange={this.onEndDateTimeChange}/>
+                     <input type='time' className="ant-input time-input" value={this.state.endTime}
+                       onChange={this.onEndDateTimeChange}
+                       min={this.state.startTime}></input>
 
               </Form.Item>
 
@@ -157,7 +184,7 @@ class MobileEditEventDialog extends React.Component {
                     onClick={ this.props.onCancelEditDialog }>
                     Отмена
             </Button>
-            <Button type="primary" disabled={ this.state.eventSummary === '' } className="mobile-info-dialog-footer-btn" onClick={ this.props.mode === "new" ?
+            <Button type="primary" disabled={ this.state.eventSummary === '' || this.state.showError } className="mobile-info-dialog-footer-btn" onClick={ this.props.mode === "new" ?
               () => this.props.onCreateEvent(this.event) :
               () => this.props.onUpdateEvent(this.event) }>
               { this.props.mode === "new" ? "Создать" : "Сохранить"}

@@ -5,3 +5,17 @@
   height: 75vh;
 
 }
+
+.date-input {
+  margin-right: 15px;
+  margin-bottom: 15px;
+  width: 160px;
+}
+
+.time-input {
+  width: auto;
+}
+
+.error-message {
+  margin-bottom: 15px;
+}
