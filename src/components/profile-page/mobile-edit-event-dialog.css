@@ -3,7 +3,7 @@
   padding-right: 30px;
   overflow-y: scroll;
   height: 75vh;
-
+  -webkit-overflow-scrolling: touch;
 }
 
 .date-input {
