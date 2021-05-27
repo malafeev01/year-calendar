@@ -16,6 +16,7 @@
   text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
+  z-index: 10001;
 }
 
 .mobile-info-dialog-footer-btn {
@@ -34,4 +35,16 @@
   font-weight: 300;
   padding-left: 25px;
   margin-bottom: 7vw;
+}
+
+.mobile-event-popup-actions-icon {
+  margin-top: 3px;
+  margin-right: 20px;
+  font-size: 20px;
+  color: grey;
+}
+
+.mobile-event-popup-actions-icon:hover {
+  cursor: pointer;
+  color: black;
 }

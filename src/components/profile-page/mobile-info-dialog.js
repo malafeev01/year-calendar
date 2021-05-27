@@ -69,13 +69,13 @@ class MobileInfoDialog extends React.Component {
                             onMouseUp={(event)=>{event.stopPropagation()}}
                             onClick={ (evt) => { evt.stopPropagation();
                                                  this.editEventHandler(event) }}
-                            className="event-popup-actions-icon"/>
+                            className="mobile-event-popup-actions-icon"/>
 
               <DeleteOutlined onMouseDown={(event)=>{event.stopPropagation()}}
                               onMouseUp={(event)=>{event.stopPropagation()}}
                               onClick={ (evt) => { evt.stopPropagation();
                                                    this.deleteEventHandler(event) }}
-                              className="event-popup-actions-icon"/>
+                              className="mobile-event-popup-actions-icon"/>
             </Col>
           </Row>
         )
