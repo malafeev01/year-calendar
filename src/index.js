@@ -5,15 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ConfigProvider } from 'antd';
 
-import ru_RU from 'antd/lib/locale-provider/ru_RU';
+import en_US from 'antd/lib/locale-provider/en_US';
 import moment from 'moment';
 import 'moment/locale/ru';  // important!
 
-moment.locale('ru');  // important!
+moment.locale('en');  // important!
 
 ReactDOM.render(
   <React.StrictMode>
-    <ConfigProvider locale={ru_RU}>
+    <ConfigProvider locale={en_US}>
       <App />
     </ConfigProvider>
   </React.StrictMode>,

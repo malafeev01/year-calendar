@@ -103,7 +103,7 @@ class MobileEditEventDialog extends React.Component {
 
     let alert;
     if (this.state.showError) {
-      alert = <Alert message="Начальная дата больше конечной" type="error" className="error-message "/>
+      alert = <Alert message="Start date is greater than end date" type="error" className="error-message "/>
     }
 
     return (
@@ -112,8 +112,8 @@ class MobileEditEventDialog extends React.Component {
 
           <div className="mobile-info-dialog-events-header">
             { this.props.mode === "new" ?
-                           "Новое событие" :
-                           "Событие: " + this.event.summary }
+                           "New event" :
+                           "Event: " + this.event.summary }
           </div>
 
           <div className="mobile-edit-dialog-events-containter">
@@ -123,7 +123,7 @@ class MobileEditEventDialog extends React.Component {
 
               {alert}
 
-              <Form.Item label="Начало">
+              <Form.Item label="Start">
                 <input type='date' className="ant-input date-input" value={this.state.startDate}
                        onChange={this.onStartDateChange}
                        max={this.state.endDate}></input>
@@ -134,7 +134,7 @@ class MobileEditEventDialog extends React.Component {
 
               </Form.Item>
 
-              <Form.Item label="Конец">
+              <Form.Item label="End">
 
                 <input type='date' className="ant-input date-input" value={this.state.endDate}
                        onChange={this.onEndDateChange}
@@ -146,7 +146,7 @@ class MobileEditEventDialog extends React.Component {
 
               </Form.Item>
 
-              <Form.Item label="Название">
+              <Form.Item label="Title">
                 <Input autoComplete="off" defaultValue={this.event.summary}
                        onChange={this.onNameChange}
                        rules={[
@@ -160,7 +160,7 @@ class MobileEditEventDialog extends React.Component {
                       />
               </Form.Item>
 
-              <Form.Item label="Цвет">
+              <Form.Item label="Color">
                 <Select optionLabelProp="value"
                         defaultValue={ <ColorItem
                           color={COLORS[this.event.colorId ?
@@ -170,7 +170,7 @@ class MobileEditEventDialog extends React.Component {
                 </Select>
               </Form.Item>
 
-              <Form.Item label="Описание">
+              <Form.Item label="Description">
                 <TextArea rows={4} defaultValue={this.event.description}
                           onChange={ this.onDescriptionChange }/>
               </Form.Item>
@@ -182,12 +182,12 @@ class MobileEditEventDialog extends React.Component {
           <div className="mobile-info-dialog-footer">
             <Button className="mobile-info-dialog-footer-btn"
                     onClick={ this.props.onCancelEditDialog }>
-                    Отмена
+                    Cancel
             </Button>
             <Button type="primary" disabled={ this.state.eventSummary === '' || this.state.showError } className="mobile-info-dialog-footer-btn" onClick={ this.props.mode === "new" ?
               () => this.props.onCreateEvent(this.event) :
               () => this.props.onUpdateEvent(this.event) }>
-              { this.props.mode === "new" ? "Создать" : "Сохранить"}
+              { this.props.mode === "new" ? "Create" : "Save"}
             </Button>
           </div>
         </div>

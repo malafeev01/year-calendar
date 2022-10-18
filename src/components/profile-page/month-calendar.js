@@ -109,7 +109,7 @@ class MonthCalendar extends React.Component {
 
         if (events.length > 0 && !isMobile()) {
           cellRender = <Popover content={getPopoverContent(events, this)}
-                                title="События">
+                                title="Events">
                           <div title={ date.format("YYYY-MM-DD").toString() }
                                className="calendar-date-cell"
                                onClick={ (event) => { if (moment(event.target.title).month() !== this.state.value.month()) { event.stopPropagation(); } } }>

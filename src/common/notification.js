@@ -3,7 +3,7 @@ import { notification } from 'antd';
 
 function showSuccessNotification(message) {
     notification.success({
-      message: "Готово",
+      message: "Done",
       description: message,
       placement: "bottomRight"
     });
@@ -21,7 +21,7 @@ function showErrorNotification(error) {
       message = JSON.stringify(error);
     }
     notification.error({
-      message: `Ошибка ${status}`,
+      message: `Error ${status}`,
       description: message,
       placement: "bottomRight",
       duration: 0

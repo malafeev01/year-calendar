@@ -204,7 +204,7 @@ class YearCalendar extends React.Component {
       this.setState({events: events})
       this.closeEditDialog();
 
-      showSuccessNotification(`Событие "${event.summary}" успешно добавлено в календарь`);
+      showSuccessNotification(`Event "${event.summary}" has been successfully created`);
 
     }).catch((error)=>{
       console.log(error)
@@ -229,7 +229,7 @@ class YearCalendar extends React.Component {
       this.setState({events: events})
       this.closeEditDialog();
 
-      showSuccessNotification(`Событие "${event.summary}" успешно обновлено`);
+      showSuccessNotification(`Event "${event.summary}" has been successfully updated`);
 
     }).catch((error)=>{
       console.log(error)
@@ -252,7 +252,7 @@ class YearCalendar extends React.Component {
       }
 
       this.setState({events: events})
-      showSuccessNotification(`Событие "${event.summary}" успешно удалено`);
+      showSuccessNotification(`Event "${event.summary}" has been successfully deleted`);
     }).catch((error)=>{
       logError(this, JSON.stringify(error))
       showErrorNotification(error);
@@ -263,12 +263,12 @@ class YearCalendar extends React.Component {
     logInfo(this, `showDeleteConfirm: show delete cofirmation for ${event.id} event`);
     let context = this;
     confirm({
-      title: 'Вы точно хотите удалить событие?',
+      title: 'Do you really want to delete this event?',
       icon: <ExclamationCircleOutlined />,
-      content: `Событие "${event.summary}" будет удалено безвозвратно.`,
-      okText: 'Подтвердить',
+      content: `Event "${event.summary}" will be deteled.`,
+      okText: 'Confirm',
       okType: 'danger',
-      cancelText: 'Отмена',
+      cancelText: 'Cancel',
 
       onOk() {
         context.deleteEvent(event);

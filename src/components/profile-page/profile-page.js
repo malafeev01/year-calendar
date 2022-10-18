@@ -35,7 +35,7 @@ class ProfilePage extends React.Component {
         logInfo(this, "componentDidMount: calendar doesn't exist. Starting creation.");
         this.api.createCalendar().then( (response) => {
           localStorage.setItem('calendarId', response.result.id);
-          showSuccessNotification("Вы успешно создали новый каледарь.");
+          showSuccessNotification("A new calendar has been created sucessfully.");
           this.setState({ events: [], calendarLoading: false });
         }).catch( (error) => {
           logError(this, JSON.stringify(error));

@@ -41,7 +41,7 @@ class ProfileNavBar extends React.Component {
 
     if (!smallScreen){
       appName = <Menu.Item className="profile-nav-bar-title">
-                      <Link to="/">Годовой календарь</Link>
+                      <Link to="/">YearPlan.app</Link>
                     </Menu.Item>
     }
     else {
@@ -61,7 +61,7 @@ class ProfileNavBar extends React.Component {
                 icon={<div className="profile-nav-bar-avatar"
                            style={{"backgroundImage": `url(${this.props.api.getUserProfile().getImageUrl()})`}}></div>}>
 
-          <Menu.Item key="logout" className="profile-nav-bar-menu-exit" onClick={ this.onExit }>Выйти</Menu.Item>
+          <Menu.Item key="logout" className="profile-nav-bar-menu-exit" onClick={ this.onExit }>Logout</Menu.Item>
 
         </SubMenu>
 

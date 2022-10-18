@@ -81,7 +81,7 @@ class MobileInfoDialog extends React.Component {
         )
       });
     } else {
-      eventLines = "Нет событий"
+      eventLines = "There are no events"
     }
 
     return (
@@ -89,7 +89,7 @@ class MobileInfoDialog extends React.Component {
         <div className="mobile-info-dialog-container">
 
           <div className="mobile-info-dialog-events-header">
-          События
+          Events
           </div>
 
           <div className="mobile-info-dialog-events-containter">
@@ -99,9 +99,9 @@ class MobileInfoDialog extends React.Component {
           <div className="mobile-info-dialog-footer">
             <Button className="mobile-info-dialog-footer-btn"
                     onClick={ this.props.onCancelInfoDialog }>
-            Закрыть</Button>
+            Close</Button>
             <Button type="primary" className="mobile-info-dialog-footer-btn" onClick={this.createEventHandler}>
-              Создать событие
+              Create event
             </Button>
           </div>
         </div>

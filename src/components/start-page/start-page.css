@@ -73,9 +73,10 @@
 .start-page-menu-header {
   font-size: calc(38px + (72 - 20) * ((120vw - 300px) / (1600 - 300)));
   font-weight: 100;
-  color: lightgray;
+  color: white;
   padding-left: 2vw;
   padding-right: 2vw;
+  letter-spacing: 10px;
 }
 
 .start-page-menu-pitch {

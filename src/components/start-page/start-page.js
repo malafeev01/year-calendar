@@ -42,25 +42,25 @@ class StartPage extends React.Component {
 
     if (this.props.loading) {
       item =  <Menu.Item key="login" className="start-page-menu-item">
-                Загрузка...
+                Loading...
               </Menu.Item>
 
       button = <Button className="start-page-enter-button" type='ghost'
                        size='large' shape='round'>
-               Загрузка...
+               Loading...
               </Button>
     }
     else{
       item =  <Menu.Item key="login" className="start-page-menu-item"
                          onClick={ this.props.api.isSignedIn() ?  this.goToProfile  : this.signIn }>
-                { this.props.api.isSignedIn() ? <> { this.props.api.getUserProfile().getName() }</> : <>Войти</> }
+                { this.props.api.isSignedIn() ? <> { this.props.api.getUserProfile().getName() }</> : <>Log in</> }
               </Menu.Item>
 
       button = <Button onClick={ this.props.api.isSignedIn() ?  this.goToProfile  : this.signIn }
               className="start-page-enter-button"
               type='ghost' size='large' shape='round'>
 
-              { this.props.api.isSignedIn() ? <> Перейти в профиль </> : <> Войти через Google</> }
+              { this.props.api.isSignedIn() ? <> Profile </> : <> Login via Google</> }
 
              </Button>
     }
@@ -73,15 +73,15 @@ class StartPage extends React.Component {
         { item }
 
         <Menu.Item key="contacts" className="start-page-menu-item" onClick={ this.goToSlide }>
-          Контакты
+          Contacts
         </Menu.Item>
 
         <Menu.Item key="donate" className="start-page-menu-item" onClick={ this.goToSlide }>
-          Донаты
+          Donates
         </Menu.Item>
 
         <Menu.Item key="about" className="start-page-menu-item" onClick={ this.goToSlide }>
-          О проекте
+          About
         </Menu.Item>
 
 
@@ -92,22 +92,22 @@ class StartPage extends React.Component {
         <div className="start-page-start-box-background"> </div>
         <div className="start-page-start-box-backcolor"> </div>
         <div className="start-page-start-box-text">
-          <h1 className="start-page-menu-header">Годовой календарь</h1>
-          <h3 className="start-page-menu-pitch">Для тех, кто любит планировать на год вперед</h3>
+          <h1 className="start-page-menu-header">Yearplan.app</h1>
+          <h3 className="start-page-menu-pitch">For those who like long-term plans</h3>
           { button }
         </div>
       </div>
 
       <div name="about" className='start-page-fake-menu'></div>
       <div className="start-page-landing-row">
-        <h1 className="start-page-menu-header-lightback">Годовой календарь это:</h1>
+        <h1 className="start-page-menu-header-lightback">What is Yearplan.app</h1>
 
           <h3 className="start-page-menu-pitch-lightback">
-            Приложение, которое позволит вам осуществить годовое планирование</h3>
+            An application for long-term planning</h3>
           <h3 className="start-page-menu-pitch-lightback">
-            Простой и удобный пользовательский интерфейс</h3>
+            Simple and comfortable user interface</h3>
           <h3 className="start-page-menu-pitch-lightback">
-            Безопасность ваших данных - мы не храним данные у себя, приложение полностью интегрировано с Google.Calendar</h3>
+            Security - we don't collect your personal data on our servers, this application is fully integrated with Google.Calendar</h3>
 
           <div className="start-page-app-example-container">
             <div className="start-page-app-example"></div>
@@ -118,13 +118,14 @@ class StartPage extends React.Component {
 
       <div name="donate" className='start-page-fake-menu'></div>
       <div className="start-page-landing-row">
-        <h1 className="start-page-menu-header-lightback">Помощь проекту</h1>
+        <h1 className="start-page-menu-header-lightback">Helping to the project</h1>
         <div className="start-page-app-donate-container">
 
           <blockquote>
-            Привет, планируя путешествия или какие-то мероприятия за долго до их совершения, мне всегда не хватало такого календаря, где на годовом виде будут отображены все запланированные события, так чтобы я ничего не забыл. Тогда мне и пришла идея написать такое приложение. Этим приложением можете пользоваться и вы, совершенно бесплатно, без пробного периода и надоедливой рекламы.
-            При этом, я буду рад любой поддержке для развития проекта.
-          <span>Алексей Малафеев (автор проекта)</span>
+            Hi, I have been looking for such a calendar app where on year view I can see all my planned events.
+            Then I got the idea to create this application. You can use this app for free without any trial periods or annoying ads.
+            At the same time, I'll be happy to get any kind of your support.
+          <span>Alexey Malafeev (author of the project)</span>
           </blockquote>
 
         </div>
@@ -134,15 +135,15 @@ class StartPage extends React.Component {
           <form method="POST" action="https://yoomoney.ru/quickpay/confirm.xml" target='_blank'>
               <input type="hidden" name="receiver" value="410019253514907"/>
               <input type="hidden" name="quickpay-form" value="donate"/>
-              <input type="hidden" name="targets" value="Спасибо за годовой календарь"/>
+              <input type="hidden" name="targets" value="Thanks for yearplan.app"/>
               <div>
                 <input name="sum" defaultValue="100" data-type="number" className="start-page-donate-input"/>
               </div>
               <div className="start-page-donate-currency">
-                рублей
+                rub
               </div>
               <div className="start-page-donate-button-box">
-                <input type="submit" value="Перевести" className="start-page-donate-button"/>
+                <input type="submit" value="Donate" className="start-page-donate-button"/>
               </div>
 
           </form>
@@ -152,8 +153,8 @@ class StartPage extends React.Component {
 
       <div name="contacts" className='start-page-fake-menu'></div>
       <div className="start-page-landing-row">
-        <h1 className="start-page-menu-header-lightback">Контакты</h1>
-        <h3 className="start-page-menu-pitch-lightback">Буду рад любым отзывам и предложения по развитию календаря. Напишите мне.</h3>
+        <h1 className="start-page-menu-header-lightback">Contacts</h1>
+        <h3 className="start-page-menu-pitch-lightback">You are welcome to send any feedback. Please contact me.</h3>
         <div className="start-page-app-email-container">
           <a href="mailto:malafeev.alexey@gmail.com">malafeev.alexey@gmail.com</a>
         </div>
@@ -177,12 +178,12 @@ class StartPage extends React.Component {
 
       <div className="start-page-footer">
         <div className="start-page-footer-label">
-          Алексей Малафеев @ { moment().year() } год.
+          Alexey Malafeev @ { moment().year() }
         </div>
       </div>
 
       <BackTop onClick={this.goToTop}>
-        <div className="start-page-back-top">Наверх</div>
+        <div className="start-page-back-top">Up</div>
       </BackTop>
 
     </>

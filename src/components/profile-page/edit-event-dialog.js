@@ -103,7 +103,7 @@ class EditEventDialog extends React.Component {
                                    allowClear={false} defaultValue={moment(this.event.end.dateTime)}
                                    onChange={this.onEndDateTimeChange}/>
 
-      oneDatePicker = <Form.Item label="Дата">
+      oneDatePicker = <Form.Item label="Date">
                         <DatePicker allowClear={false}
                                     defaultValue={moment(this.event.start.dateTime)}
                                     onChange={this.onDateChange}/>
@@ -124,11 +124,11 @@ class EditEventDialog extends React.Component {
 
     return (
       <Modal title={ this.props.mode === "new" ?
-                     "Новое событие" :
-                     "Событие: " + this.event.summary }
+                     "New event" :
+                     "Event: " + this.event.summary }
              visible={ true } onCancel={ this.props.onCancelEditDialog }
              maskStyle={{zIndex: 1041}}
-             okText={ this.props.mode === "new" ? "Создать" : "Сохранить"}
+             okText={ this.props.mode === "new" ? "Create" : "Save"}
              onOk={ this.props.mode === "new" ?
                () => this.props.onCreateEvent(this.event) :
                () => this.props.onUpdateEvent(this.event) }
@@ -139,15 +139,15 @@ class EditEventDialog extends React.Component {
 
           { oneDatePicker }
 
-          <Form.Item label="Начало">
+          <Form.Item label="Start">
             {startDatePicker}
           </Form.Item>
 
-          <Form.Item label="Конец">
+          <Form.Item label="End">
             {endDatePicker}
           </Form.Item>
 
-          <Form.Item label="Название">
+          <Form.Item label="Title">
             <Input autoComplete="off" defaultValue={this.event.summary}
                    onChange={this.onNameChange}
                    rules={[
@@ -161,7 +161,7 @@ class EditEventDialog extends React.Component {
                   />
           </Form.Item>
 
-          <Form.Item label="Цвет">
+          <Form.Item label="Color">
             <Select optionLabelProp="value"
                     defaultValue={ <ColorItem
                       color={COLORS[this.event.colorId ?
@@ -171,7 +171,7 @@ class EditEventDialog extends React.Component {
             </Select>
           </Form.Item>
 
-          <Form.Item label="Описание">
+          <Form.Item label="Description">
             <TextArea rows={4} defaultValue={this.event.description}
                       onChange={ this.onDescriptionChange }/>
           </Form.Item>
