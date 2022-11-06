@@ -141,6 +141,23 @@
   margin-top: 70px;
 }
 
+.start-page-signin-button {
+ background-image: url('../../img/btn_signin_normal.png');
+ background-size: contain;
+ width: 212px;
+ height: 52px;
+ cursor: pointer;
+ margin-top: 90px;
+}
+
+.start-page-signin-button:focus {
+  background-image: url('../../img/btn_signin_focus.png');
+}
+
+.start-page-signin-button:active {
+  background-image: url('../../img/btn_signin_pressed.png');
+}
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
 
 blockquote {

@@ -26,6 +26,10 @@ class StartPage extends React.Component {
     window.location.href = '/profile';
   }
 
+  goToPrivacy(){
+    window.location.href = '/privacy';
+  }
+
   goToSlide(event){
     let slideName = event.key;
     let url = window.location.origin + '/#' + slideName;
@@ -53,16 +57,18 @@ class StartPage extends React.Component {
     else{
       item =  <Menu.Item key="login" className="start-page-menu-item"
                          onClick={ this.props.api.isSignedIn() ?  this.goToProfile  : this.signIn }>
-                { this.props.api.isSignedIn() ? <> { this.props.api.getUserProfile().getName() }</> : <>Log in</> }
+                { this.props.api.isSignedIn() ? <> { this.props.api.getUserProfile().getName() }</> : <></> }
               </Menu.Item>
 
-      button = <Button onClick={ this.props.api.isSignedIn() ?  this.goToProfile  : this.signIn }
-              className="start-page-enter-button"
-              type='ghost' size='large' shape='round'>
-
-              { this.props.api.isSignedIn() ? <> Profile </> : <> Login via Google</> }
-
-             </Button>
+      if (this.props.api.isSignedIn()) {
+        button = <Button onClick={this.goToProfile} className="start-page-enter-button"
+                         type='ghost' size='large' shape='round'>
+                  Profile
+                 </Button>
+      }
+      else {
+        button = <div onClick={ this.signIn } className="start-page-signin-button"> </div>
+      }
     }
 
     return (
@@ -84,7 +90,9 @@ class StartPage extends React.Component {
           About
         </Menu.Item>
 
-
+        <Menu.Item key="privacy" className="start-page-menu-item" onClick={ this.goToPrivacy }>
+          Privacy Policy
+        </Menu.Item>
       </Menu>
 
       <div name="top" className='start-page-fake-menu'></div>

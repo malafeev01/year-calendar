@@ -5,6 +5,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import StartPage from './components/start-page/start-page.js'
 import ProfilePage from './components/profile-page/profile-page.js'
+import PrivacyPage from './components/privacy-page/privacy-page.js'
 import {showErrorNotification} from './common/notification.js'
 import {logInfo, logError} from './common/utilities.js';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -47,6 +48,10 @@ class App extends React.Component {
 
       <Router>
         <Switch>
+          <Route path="/privacy">
+            { this.state.loading ?  loading  : <PrivacyPage api={this.api}/>}
+          </Route>
+
           <Route path="/profile">
             { this.state.loading ?  loading  : <ProfilePage api={this.api}/>}
           </Route>
