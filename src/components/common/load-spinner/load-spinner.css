@@ -1,0 +1,23 @@
+.load-spinner-container {
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+}
+
+.load-spinner-icon {
+  font-size: 100px !important;
+  color: #9c9c9c;
+}
+
+.ant-spin-text {
+  color: #9c9c9c;
+  font-size: 25px;
+  font-weight: 200;
+  margin-top: 25px;
+}

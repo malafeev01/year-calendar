@@ -1,0 +1,72 @@
+.mobile-info-dialog-container {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 1001;
+  background: var(--background-color);
+  top: 0;
+}
+
+.mobile-info-dialog-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: var(--background-color);
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  z-index: 10001;
+}
+
+.mobile-info-dialog-footer-btn {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.mobile-info-dialog-events-containter {
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
+.mobile-info-dialog-events-header {
+  margin-top: 30px;
+  font-size: 22px;
+  font-weight: 300;
+  padding-left: 25px;
+  margin-bottom: 7vw;
+}
+
+.mobile-event-popup-actions-icon {
+  margin-top: 3px;
+  margin-right: 20px;
+  font-size: 18px;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.mobile-event-popup-actions-icon:hover {
+  cursor: pointer;
+  color: var(--text-color);
+  opacity: 1;
+}
+
+.mobile-event-popup-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.mobile-event-popup-color-col {
+  flex-grow: 0;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  border-radius: 18px;
+}
+.mobile-event-popup-summary-col {
+  flex-grow: 1;
+  font-size: 18px;
+}
+.mobile-event-popup-actions-col {
+  flex-grow: 0;
+}

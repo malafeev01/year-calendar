@@ -1,0 +1,23 @@
+.color-item {
+  width: 60%;
+  height: 80%;
+  margin-top: 3px;
+}
+
+.whole-day-checkbox {
+  margin-bottom: 30px;
+}
+
+/* Workaround for setting 'space-between' layout for date pickers */
+.ant-form-item-control-input-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media screen and (max-width: 576px) {
+  .whole-day-checkbox .ant-form-item-control-input-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}

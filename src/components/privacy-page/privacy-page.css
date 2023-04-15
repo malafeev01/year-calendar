@@ -1,140 +1,38 @@
-.privacy-page-back {
-    font-size: calc(15px + (28 - 15) * ((100vw - 300px) / (1600 - 300)));
-    font-weight: 200;
-    color: #585757;
-    margin-left: 3vw;
-    padding: 5px;
+.privacy-page-back-link {
+  font-size: calc(15px + (28 - 15) * ((100vw - 300px) / (1600 - 300)));
+  font-weight: 200;
+  margin-left: 3vw;
+  padding: 5px;
+  padding-top: 100px;
 }
 
 .privacy-page-paragraph {
-    font-size: calc(12px + (24 - 12) * ((100vw - 300px) / (1600 - 300)));
-    font-weight: 200;
-    color: #585757;
-    margin-left: 6vw;
-    padding: 5px;
-    margin-bottom: 25px;
+  font-size: calc(12px + (24 - 12) * ((100vw - 300px) / (1600 - 300)));
+  font-weight: 200;
+
+  margin-left: 6vw;
+  padding: 5px;
+  margin-bottom: 25px;
 }
 
 .privacy-page-landing-row {
-    width: 100%;
-    min-height: 100vh;
-    position: relative;
-    margin-bottom: 30px;
-  }
-  
-  
-  .privacy-page-fake-menu {
-    height: 46px;
-    width: 100%;
-  }
-  
-  .privacy-page-menu {
-    position: fixed;
-    opacity: 1;
-    z-index: 1;
-    background: none;
-  }
-  
-  .privacy-page-menu-item {
-    float: right;
-    font-weight: 250;
-    background-color: rgba(0, 0, 0, 0) !important;
-  }
-  
-  .privacy-page-menu-item:hover {
-    background-color: rgba(0, 0, 0, 0.1) !important;
-  }
-  
-  .ant-menu-sub {
-    background: #423c52 !important;
-  }
-  
-  .ant-menu-submenu-active {
-    color: white;
-  }
-  
-  .ant-menu-submenu-selected {
-    color: rgba(255, 255, 255, 0.65);
-  }
-  
-  .privacy-page-menu-header {
-    font-size: calc(38px + (72 - 20) * ((120vw - 300px) / (1600 - 300)));
-    font-weight: 100;
-    color: white;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    letter-spacing: 10px;
-  }
-  
-  .privacy-page-menu-header-lightback {
-    font-size: calc(38px + (100 - 38) * ((50vw - 300px) / (1600 - 300)));
-    font-weight: 200;
-    color: #585757;
-    margin-left: 3vw;
-    padding: 5px;
-  }
-  
-  .privacy-page-menu-pitch-lightback {
-    font-size: calc(15px + (28 - 15) * ((100vw - 300px) / (1600 - 300)));
-    font-weight: 300;
-    color: #585757;
-    margin-left: 5vw;
-    padding-right: 3vw;
-  }
-  
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  margin-bottom: 30px;
+  color: var(--text-color);
+}
 
+.privacy-page-header {
+  font-size: calc(38px + (100 - 38) * ((50vw - 300px) / (1600 - 300)));
+  font-weight: 200;
+  margin-left: 3vw;
+  padding: 5px;
+}
 
-  @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
-  
-  .privacy-page-footer {
-    width: 100%;
-    height: 40px;
-    position: relative;
-    background: linear-gradient(90deg, rgb(210 89 31) 0%, rgb(136 22 134 / 75%) 40%, rgb(39 173 142) 100%);
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .privacy-page-footer-label {
-    font-size: 16px;
-    color: lightgray;
-  }
-  
-  html, body {
-    overflow-x: hidden;
-  }
-  
-  @media screen and (max-width: 450px) {
-    .event-popup-row {
-      min-width: 100vw;
-      margin: 5px;
-      display: flex !important;
-      row-gap: 0px !important;
-      flex-direction: row !important;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-  
-    .ant-row {
-      display: flex;
-      flex-flow: column;
-      justify-content: center;
-      align-items: center;
-    }
-  
-    .ant-form-item-control {
-      width: 300px;
-    }
-  
-    .ant-col {
-      max-width: none;
-    }
-  
-    .ant-form-item {
-      row-gap: 0px;
-      align-items: end;
-    }
-  }
-  
+.privacy-page-subheader {
+  font-size: calc(15px + (28 - 15) * ((100vw - 300px) / (1600 - 300)));
+  font-weight: 300;
+  margin-left: 5vw;
+  padding-right: 3vw;
+}
