@@ -5,6 +5,8 @@
   user-select: none;
   padding-top: 60px;
   height: calc(100vh - 64px);
+  background-color: var(--background-color);
+  height: 100%;
 }
 
 .year-calendar-change-year {

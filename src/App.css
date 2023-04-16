@@ -1,8 +1,12 @@
 body {
   font-family: "Rubik" !important;
   color: var(--text-color);
-  background-color: var(--background-color);
+  background-color: var(--navbar-background-color);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
 a {
   color: var(--a-color);
 }

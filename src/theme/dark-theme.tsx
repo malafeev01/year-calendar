@@ -2,7 +2,7 @@ export const DarkTheme = {
   "--background-color": "#181d20",
   "--text-color": "#c2c6c9",
   "--theme-switcher-border": "#454749",
-  "--navbar-background-color": "#121212f0",
+  "--navbar-background-color": "#131313",
   "--navbar-shadow-color": "#2a2a2a",
   "--donate-btn-background-color": "#101010",
   "--donate-btn-background-color__hover": "#191919",

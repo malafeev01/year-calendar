@@ -103,12 +103,6 @@ function StartPage() {
           representation of the year, making it easier to see how different
           events and activities fit together and how they impact each other.
         </h3>
-
-        <h3 className="start-page-label">
-          <b> Coordination</b>. A year calendar can be shared with others,
-          making it easier to coordinate schedules and plan events with family,
-          friends, and colleagues.
-        </h3>
         <h3 className="start-page-label">
           <b> Memory aid</b>. A year calendar can serve as a memory aid, helping
           to remember important dates and events that might otherwise be
@@ -139,6 +133,7 @@ function StartPage() {
         data-id="contacts"
         className="start-page-slide start-page-last-slide"
       >
+        <div>
         <h1 className="start-page-header">Contacts</h1>
         <h3 className="start-page-label">
           You are welcome to send any feedback. Please contact me.
@@ -194,12 +189,15 @@ function StartPage() {
             Instagram
           </a>
         </div>
-      </div>
-      <div className="start-page-footer">
-        <div className="start-page-footer-label">
-          Alexey Malafeev @ {dayjs().year()}
         </div>
+        <div className="start-page-footer">
+          <div className="start-page-footer-label">
+            Alexey Malafeev @ {dayjs().year()}
+          </div>
+        </div>
+        
       </div>
+
     </div>
   );
 }

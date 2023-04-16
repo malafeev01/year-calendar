@@ -19,7 +19,7 @@ export default function SideBar(props: { show: boolean }) {
     const url = window.location.origin + "/#" + slideName;
     window.history.replaceState(null, "", url);
 
-    const slide = document.querySelector(`div[name="${slideName}"]`);
+    const slide = document.querySelector(`div[data-id="${slideName}"]`);
     slide?.scrollIntoView({ behavior: "smooth" });
     setShow(false);
   };

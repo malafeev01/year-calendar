@@ -1,6 +1,6 @@
 import "./month-calendar.css";
 
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { Row, Col, Calendar, Popover } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
@@ -25,9 +25,15 @@ type MonthCalendarProps = {
 };
 
 function MonthCalendar(props: MonthCalendarProps) {
-  const [value] = useState(dayjs().month(props.month).year(props.year));
+  const [value, setValue] = useState(
+    dayjs().month(props.month).year(props.year)
+  );
   const store = useStore<ThemeStore>();
   const theme = store.getState().theme;
+
+  useEffect(() => {
+    setValue(dayjs().month(props.month).year(props.year));
+  }, [props.year]); //eslint-disable-line react-hooks/exhaustive-deps
 
   const editEventHandler = (calendarEvent: CalendarEvent) => {
     props.onShowEditDialog(calendarEvent, "edit");

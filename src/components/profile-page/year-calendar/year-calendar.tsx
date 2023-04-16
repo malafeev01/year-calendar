@@ -70,6 +70,7 @@ function YearCalendar() {
   let lastTap: number;
 
   useEffect(() => {
+    setLoading(true);
     api
       .isCalendarExist()
       .then((exist) => {
@@ -348,12 +349,10 @@ function YearCalendar() {
 
   const setNextYear = () => {
     setCurrentYear(currentYear + 1);
-    setLoading(true);
   };
 
   const setPreviousYear = () => {
     setCurrentYear(currentYear - 1);
-    setLoading(true);
   };
 
   const handleDoubleTap = (mouseEvent: ReactMouseEvent) => {
@@ -427,128 +426,122 @@ function YearCalendar() {
           </div>
         </div>
 
-        {loading ? (
-          <></>
-        ) : (
-          <>
-            <Row gutter={25} justify="space-around">
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={0}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={1}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={2}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={3}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-            </Row>
+        <Row gutter={25} justify="space-around">
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={0}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={1}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={2}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={3}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+        </Row>
 
-            <Row gutter={25} justify="space-around">
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={4}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={5}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={6}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={7}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-            </Row>
+        <Row gutter={25} justify="space-around">
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={4}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={5}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={6}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={7}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+        </Row>
 
-            <Row gutter={25} justify="space-around">
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={8}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={9}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={10}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-              <Col className="gutter-row calendar-row-container" span={4}>
-                <MonthCalendar
-                  year={currentYear}
-                  month={11}
-                  calendarEvents={events}
-                  onShowEditDialog={showEditEventDialog}
-                  onDeleteEvent={showDeleteConfirm}
-                />
-              </Col>
-            </Row>
-          </>
-        )}
+        <Row gutter={25} justify="space-around">
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={8}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={9}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={10}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+          <Col className="gutter-row calendar-row-container" span={4}>
+            <MonthCalendar
+              year={currentYear}
+              month={11}
+              calendarEvents={events}
+              onShowEditDialog={showEditEventDialog}
+              onDeleteEvent={showDeleteConfirm}
+            />
+          </Col>
+        </Row>
       </div>
     </>
   );

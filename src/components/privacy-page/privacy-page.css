@@ -1,3 +1,7 @@
+.privacy-page {
+  background-color: var(--background-color);
+}
+
 .privacy-page-back-link {
   font-size: calc(15px + (28 - 15) * ((100vw - 300px) / (1600 - 300)));
   font-weight: 200;

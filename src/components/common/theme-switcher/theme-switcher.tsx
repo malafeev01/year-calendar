@@ -37,7 +37,6 @@ export default function ThemeSwitcher() {
       className="theme-switcher"
     >
       <div data-testid="theme_switcher_icon" className={currentClass}>
-        {getTheme() === "dark" ? "🌚" : "🌞"}
       </div>
     </div>
   );

@@ -21,6 +21,7 @@ body {
   scroll-snap-stop: always;
   padding-top: 50px;
   z-index: 2;
+  box-sizing: border-box;
 }
 
 .start-page-start-box {
@@ -37,18 +38,6 @@ body {
   padding-right: 2vw;
   letter-spacing: 10px;
   z-index: 2;
-  /* text-shadow: 0px 0px 20px rgb(193, 193, 193); */
-  /* animation: fadeshadow 5s linear;
-  animation-fill-mode: forwards; */
-}
-
-@keyframes fadeshadow {
-  from {
-    text-shadow: 0px 0px 0px rgb(193, 193, 193);
-  }
-  to {
-    text-shadow: 0px 0px 20px rgb(193, 193, 193);
-  }
 }
 
 .start-page-menu-pitch {
@@ -57,7 +46,6 @@ body {
   padding-left: 2vw;
   padding-right: 2vw;
   z-index: 2;
-  /* text-shadow: 0px 0px 20px rgb(193, 193, 193); */
 }
 
 .start-page-header {
@@ -103,7 +91,7 @@ body {
 blockquote {
   font-size: calc(15px + (28 - 15) * ((50vw - 300px) / (1600 - 300)));
   width: 90%;
-  margin: 50px auto;
+  margin: 20px auto;
   font-family: Open Sans;
   font-style: italic;
   color: var(--text-color);
@@ -143,7 +131,7 @@ blockquote span {
 }
 
 .start-page-donate-box {
-  margin-top: 50px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   position: relative;
@@ -201,8 +189,8 @@ blockquote span {
   position: relative;
   font-size: calc(18px + (60 - 18) * ((100vw - 300px) / (1600 - 300)));
   font-weight: 200;
-  padding-top: 80px;
-  margin-bottom: 50px;
+  padding-top: 40px;
+  margin-bottom: 20px;
 }
 
 .start-page-social-container {
@@ -215,7 +203,12 @@ blockquote span {
 }
 
 .start-page-last-slide {
-  min-height: calc(100vh - 90px);
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
 }
 
 .start-page-footer {
@@ -236,6 +229,9 @@ blockquote span {
 }
 
 @media screen and (max-width: 780px) {
+  .start-page {
+    height: unset;
+  }
   .start-page-footer-label {
     font-size: 12px;
   }
@@ -250,10 +246,6 @@ blockquote span {
 
   .start-page-slide {
     padding-top: 30px;
-  }
-
-  .start-page-last-slide {
-    min-height: calc(100vh - 60px);
   }
 
   blockquote {
@@ -280,4 +272,10 @@ blockquote span {
 .start-page-app-link:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+h1,
+h3 {
+  margin-block-start: 20px !important;
+  margin-block-end: 30px !important;
 }

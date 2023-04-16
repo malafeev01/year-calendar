@@ -1,6 +1,3 @@
-import "./index.css";
-
-import React from "react";
 import App from "./App";
 import { ConfigProvider, theme } from "antd";
 import en_US from "antd/locale/en_US";
@@ -27,21 +24,19 @@ const container = document.getElementById("root") || document.body;
 const root = ReactDOMClient.createRoot(container);
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ConfigProvider
-        theme={{
-          algorithm:
-            getCurrentTheme() === "dark" ? darkAlgorithm : defaultAlgorithm,
-        }}
-        locale={en_US}
-      >
-        <APIContext.Provider value={api}>
-          <ThemeProvider></ThemeProvider>
+  <Provider store={store}>
+    <ConfigProvider
+      theme={{
+        algorithm:
+          getCurrentTheme() === "dark" ? darkAlgorithm : defaultAlgorithm,
+      }}
+      locale={en_US}
+    >
+      <APIContext.Provider value={api}>
+        <ThemeProvider></ThemeProvider>
 
-          <App />
-        </APIContext.Provider>
-      </ConfigProvider>
-    </Provider>
-  </React.StrictMode>
+        <App />
+      </APIContext.Provider>
+    </ConfigProvider>
+  </Provider>
 );
