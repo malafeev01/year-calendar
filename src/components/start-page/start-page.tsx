@@ -127,6 +127,8 @@ function StartPage() {
           <div className="start-page-donate-qr-code"></div>
           <div className="start-page-donate-currency">Binance USDT</div>
         </div>
+        <div className="start-page-donate-currency">Please use my Pay ID for <br/>direct transfer through Binance - 561700109</div>
+       
       </div>
 
       <div
